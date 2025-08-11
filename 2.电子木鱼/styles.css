@@ -1,0 +1,319 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 头部样式 */
+.header {
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+}
+
+/* 功德计数器 */
+.merit-counter {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.merit-label {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.merit-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #4a90e2;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.merit-unit {
+    font-size: 1rem;
+    color: #999;
+}
+
+/* 木鱼容器 */
+.woodfish-container {
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.woodfish {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.woodfish:hover {
+    transform: scale(1.02);
+    transition: transform 0.1s ease;
+}
+
+/* 木鱼身体 */
+.woodfish-body {
+    width: 150px;
+    height: 120px;
+    background: linear-gradient(145deg, #8B4513, #A0522D);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 
+        inset 0 10px 20px rgba(0, 0, 0, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.woodfish-top {
+    width: 100px;
+    height: 20px;
+    background: linear-gradient(145deg, #654321, #8B4513);
+    border-radius: 50px;
+    position: absolute;
+    top: -10px;
+    left: 25px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.woodfish-middle {
+    width: 80px;
+    height: 15px;
+    background: linear-gradient(145deg, #654321, #8B4513);
+    border-radius: 40px;
+    position: absolute;
+    top: 15px;
+    left: 35px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.woodfish-bottom {
+    width: 60px;
+    height: 10px;
+    background: linear-gradient(145deg, #654321, #8B4513);
+    border-radius: 30px;
+    position: absolute;
+    bottom: 10px;
+    left: 45px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 木鱼棒 */
+.woodfish-stick {
+    width: 8px;
+    height: 80px;
+    background: linear-gradient(145deg, #654321, #8B4513);
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.woodfish-stick::before {
+    content: '';
+    width: 20px;
+    height: 6px;
+    background: linear-gradient(145deg, #654321, #8B4513);
+    position: absolute;
+    top: 10px;
+    right: -6px;
+    border-radius: 3px;
+    transform: rotate(45deg);
+}
+
+/* 点击提示 */
+.click-hint {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 15px;
+    font-weight: 300;
+}
+
+/* 控制按钮 */
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 15px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* 动画效果 */
+@keyframes woodfishHit {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+@keyframes meritPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+.woodfish-hit {
+    animation: woodfishHit 0.15s ease;
+}
+
+.merit-pulse {
+    animation: meritPulse 0.2s ease;
+}
+
+.ripple {
+    position: absolute;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* 页脚 */
+.footer {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* 响应式设计 */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .title {
+        font-size: 2rem;
+    }
+    
+    .woodfish {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .woodfish-body {
+        width: 120px;
+        height: 100px;
+    }
+    
+    .merit-number {
+        font-size: 2.5rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .control-btn {
+        width: 200px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .woodfish {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .woodfish-body {
+        width: 90px;
+        height: 75px;
+    }
+    
+    .merit-number {
+        font-size: 2rem;
+    }
+} 

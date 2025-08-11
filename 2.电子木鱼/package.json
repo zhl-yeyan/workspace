@@ -1,0 +1,36 @@
+{
+  "name": "electronic-woodfish",
+  "version": "1.0.0",
+  "description": "一个现代化的电子木鱼应用，支持点击敲击、音效播放、功德计数等功能",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8000 -c-1",
+    "dev": "http-server -p 8000 -c-1 -o",
+    "build": "echo '静态网站，无需构建'",
+    "deploy": "echo '请参考README.md中的部署方案'"
+  },
+  "keywords": [
+    "woodfish",
+    "electronic",
+    "buddhist",
+    "meditation",
+    "sound",
+    "web-app"
+  ],
+  "author": "电子木鱼开发者",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/electronic-woodfish.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/electronic-woodfish/issues"
+  },
+  "homepage": "https://github.com/yourusername/electronic-woodfish#readme"
+} 

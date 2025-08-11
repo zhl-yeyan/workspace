@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#667eea",
+    "navigationBarTitleText": "电子木鱼",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#667eea"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+} 

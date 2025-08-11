@@ -1,0 +1,47 @@
+<view class="container">
+  <!-- 头部 -->
+  <view class="header">
+    <text class="title">电子木鱼</text>
+    <text class="subtitle">功德无量，善缘广结</text>
+  </view>
+
+  <!-- 主要内容 -->
+  <view class="main-content">
+    <!-- 功德计数器 -->
+    <view class="merit-counter">
+      <text class="merit-label">功德数</text>
+      <text class="merit-number {{meritPulse ? 'merit-pulse' : ''}}">{{meritCount}}</text>
+      <text class="merit-unit">次</text>
+    </view>
+
+    <!-- 木鱼容器 -->
+    <view class="woodfish-container">
+      <view class="woodfish {{woodfishHit ? 'woodfish-hit' : ''}}" bindtap="handleWoodfishClick">
+        <view class="woodfish-body">
+          <view class="woodfish-top"></view>
+          <view class="woodfish-middle"></view>
+          <view class="woodfish-bottom"></view>
+        </view>
+        <view class="woodfish-stick"></view>
+      </view>
+      <text class="click-hint">点击木鱼</text>
+    </view>
+
+    <!-- 控制按钮 -->
+    <view class="controls">
+      <button class="control-btn" bindtap="toggleSound">
+        <text class="btn-icon">{{soundEnabled ? '🔊' : '🔇'}}</text>
+        <text class="btn-text">{{soundEnabled ? '音效开' : '音效关'}}</text>
+      </button>
+      <button class="control-btn" bindtap="resetMerit">
+        <text class="btn-icon">🔄</text>
+        <text class="btn-text">重置</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="footer">
+    <text>愿以此功德，庄严佛净土</text>
+  </view>
+</view> 

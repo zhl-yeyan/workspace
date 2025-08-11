@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子木鱼 - 功能测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>电子木鱼 - 功能测试</h1>
+    
+    <div class="test-section">
+        <h2>1. 基础功能测试</h2>
+        <button class="test-button" onclick="testBasicFunction()">测试基础功能</button>
+        <div id="basicResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. 音效测试</h2>
+        <button class="test-button" onclick="testAudio()">测试音效播放</button>
+        <button class="test-button" onclick="testWebAudio()">测试Web Audio API</button>
+        <div id="audioResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. 本地存储测试</h2>
+        <button class="test-button" onclick="testLocalStorage()">测试本地存储</button>
+        <button class="test-button" onclick="clearStorage()">清除存储</button>
+        <div id="storageResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. 响应式设计测试</h2>
+        <p>请调整浏览器窗口大小来测试响应式设计</p>
+        <div id="responsiveResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. 浏览器兼容性</h2>
+        <div id="browserResult"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6. 性能测试</h2>
+        <button class="test-button" onclick="testPerformance()">测试性能</button>
+        <div id="performanceResult"></div>
+    </div>
+
+    <script>
+        // 基础功能测试
+        function testBasicFunction() {
+            const result = document.getElementById('basicResult');
+            try {
+                // 测试DOM元素是否存在
+                const woodfish = document.querySelector('.woodfish');
+                const meritCount = document.getElementById('meritCount');
+                
+                if (woodfish && meritCount) {
+                    result.innerHTML = '<div class="status success">✅ 基础DOM元素加载正常</div>';
+                } else {
+                    result.innerHTML = '<div class="status error">❌ 基础DOM元素加载失败</div>';
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="status error">❌ 基础功能测试失败: ${error.message}</div>`;
+            }
+        }
+
+        // 音效测试
+        function testAudio() {
+            const result = document.getElementById('audioResult');
+            try {
+                const audio = document.getElementById('woodfishSound');
+                if (audio) {
+                    audio.play().then(() => {
+                        result.innerHTML = '<div class="status success">✅ HTML5音频播放正常</div>';
+                        audio.pause();
+                    }).catch(error => {
+                        result.innerHTML = `<div class="status info">ℹ️ HTML5音频需要用户交互: ${error.message}</div>`;
+                    });
+                } else {
+                    result.innerHTML = '<div class="status error">❌ 音频元素未找到</div>';
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="status error">❌ 音效测试失败: ${error.message}</div>`;
+            }
+        }
+
+        // Web Audio API测试
+        function testWebAudio() {
+            const result = document.getElementById('audioResult');
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    const audioContext = new AudioContext();
+                    result.innerHTML = '<div class="status success">✅ Web Audio API 支持正常</div>';
+                } else {
+                    result.innerHTML = '<div class="status error">❌ Web Audio API 不支持</div>';
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="status error">❌ Web Audio API 测试失败: ${error.message}</div>`;
+            }
+        }
+
+        // 本地存储测试
+        function testLocalStorage() {
+            const result = document.getElementById('storageResult');
+            try {
+                const testData = { test: 'data', timestamp: Date.now() };
+                localStorage.setItem('testData', JSON.stringify(testData));
+                const retrieved = JSON.parse(localStorage.getItem('testData'));
+                
+                if (retrieved && retrieved.test === 'data') {
+                    result.innerHTML = '<div class="status success">✅ 本地存储功能正常</div>';
+                } else {
+                    result.innerHTML = '<div class="status error">❌ 本地存储数据验证失败</div>';
+                }
+            } catch (error) {
+                result.innerHTML = `<div class="status error">❌ 本地存储测试失败: ${error.message}</div>`;
+            }
+        }
+
+        // 清除存储
+        function clearStorage() {
+            const result = document.getElementById('storageResult');
+            try {
+                localStorage.removeItem('testData');
+                localStorage.removeItem('woodfishData');
+                result.innerHTML = '<div class="status info">ℹ️ 存储数据已清除</div>';
+            } catch (error) {
+                result.innerHTML = `<div class="status error">❌ 清除存储失败: ${error.message}</div>`;
+            }
+        }
+
+        // 浏览器兼容性测试
+        function testBrowserCompatibility() {
+            const result = document.getElementById('browserResult');
+            const tests = {
+                'localStorage': typeof(Storage) !== "undefined",
+                'audioContext': !!(window.AudioContext || window.webkitAudioContext),
+                'fetch': typeof fetch !== 'undefined',
+                'es6': typeof Promise !== 'undefined',
+                'touch': 'ontouchstart' in window
+            };
+
+            let html = '<h3>浏览器功能支持:</h3>';
+            for (const [feature, supported] of Object.entries(tests)) {
+                html += `<div class="status ${supported ? 'success' : 'error'}">${supported ? '✅' : '❌'} ${feature}</div>`;
+            }
+
+            result.innerHTML = html;
+        }
+
+        // 性能测试
+        function testPerformance() {
+            const result = document.getElementById('performanceResult');
+            try {
+                const start = performance.now();
+                
+                // 模拟一些操作
+                for (let i = 0; i < 1000; i++) {
+                    Math.random();
+                }
+                
+                const end = performance.now();
+                const duration = end - start;
+                
+                result.innerHTML = `<div class="status info">ℹ️ 性能测试完成，耗时: ${duration.toFixed(2)}ms</div>`;
+            } catch (error) {
+                result.innerHTML = `<div class="status error">❌ 性能测试失败: ${error.message}</div>`;
+            }
+        }
+
+        // 响应式设计测试
+        function testResponsive() {
+            const result = document.getElementById('responsiveResult');
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            result.innerHTML = `
+                <div class="status info">
+                    ℹ️ 当前窗口尺寸: ${width} x ${height}px<br>
+                    ${width < 768 ? '📱 移动端模式' : width < 1024 ? '📱 平板模式' : '🖥️ 桌面端模式'}
+                </div>
+            `;
+        }
+
+        // 页面加载完成后运行测试
+        window.addEventListener('load', function() {
+            testBrowserCompatibility();
+            testResponsive();
+            
+            // 监听窗口大小变化
+            window.addEventListener('resize', testResponsive);
+        });
+    </script>
+</body>
+</html> 
