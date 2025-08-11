@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解压小游戏 - 放松心情</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎮 解压小游戏</h1>
+            <p class="subtitle">放松心情，释放压力</p>
+        </header>
+
+        <nav class="nav">
+            <button class="nav-btn active" data-game="bubble">🫧 泡泡纸</button>
+            <button class="nav-btn" data-game="sand">🏖️ 沙子画</button>
+            <button class="nav-btn" data-game="liquid">🌊 液体流</button>
+            <button class="nav-btn" data-game="particles">✨ 粒子爆炸</button>
+            <button class="nav-btn" data-game="sounds">🎵 解压音效</button>
+        </nav>
+
+        <main class="game-area">
+            <!-- 泡泡纸游戏 -->
+            <div class="game-panel active" id="bubble">
+                <div class="bubble-container">
+                    <div class="bubble-grid"></div>
+                    <div class="controls">
+                        <button class="control-btn" id="reset-bubbles">重置泡泡</button>
+                        <button class="control-btn" id="auto-pop">自动爆破</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 沙子画游戏 -->
+            <div class="game-panel" id="sand">
+                <canvas id="sand-canvas" width="800" height="600"></canvas>
+                <div class="controls">
+                    <button class="control-btn" id="clear-sand">清空画布</button>
+                    <button class="control-btn" id="rain-sand">沙子雨</button>
+                    <input type="color" id="sand-color" value="#f4d03f">
+                    <label for="sand-color">沙子颜色</label>
+                </div>
+            </div>
+
+            <!-- 液体流游戏 -->
+            <div class="game-panel" id="liquid">
+                <canvas id="liquid-canvas" width="800" height="600"></canvas>
+                <div class="controls">
+                    <button class="control-btn" id="clear-liquid">清空液体</button>
+                    <button class="control-btn" id="add-liquid">添加液体</button>
+                    <input type="color" id="liquid-color" value="#3498db">
+                    <label for="liquid-color">液体颜色</label>
+                </div>
+            </div>
+
+            <!-- 粒子爆炸游戏 -->
+            <div class="game-panel" id="particles">
+                <canvas id="particle-canvas" width="800" height="600"></canvas>
+                <div class="controls">
+                    <button class="control-btn" id="clear-particles">清空粒子</button>
+                    <button class="control-btn" id="fireworks">烟花模式</button>
+                    <input type="range" id="particle-count" min="10" max="100" value="30">
+                    <label for="particle-count">粒子数量</label>
+                </div>
+            </div>
+
+            <!-- 解压音效 -->
+            <div class="game-panel" id="sounds">
+                <div class="sound-grid">
+                    <button class="sound-btn" data-sound="bubble">🫧 泡泡声</button>
+                    <button class="sound-btn" data-sound="rain">🌧️ 雨声</button>
+                    <button class="sound-btn" data-sound="waves">🌊 海浪</button>
+                    <button class="sound-btn" data-sound="fire">🔥 火焰</button>
+                    <button class="sound-btn" data-sound="wind">💨 风声</button>
+                    <button class="sound-btn" data-sound="forest">🌲 森林</button>
+                    <button class="sound-btn" data-sound="cafe">☕ 咖啡厅</button>
+                    <button class="sound-btn" data-sound="whitenoise">⚪ 白噪音</button>
+                </div>
+                <div class="volume-control">
+                    <label for="volume">音量: </label>
+                    <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>🎮 享受解压时光，保持好心情！</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
