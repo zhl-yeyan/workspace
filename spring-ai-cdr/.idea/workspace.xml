@@ -4,15 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="配置IDEA编码，使用">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mcp-client/src/test/java/com/zhl/test/TimeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/pom.xml" afterDir="false" />
+    <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="使用StopWatch统计响应耗时">
+      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -21,6 +28,29 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="使用StopWatch统计响应耗时">
+      <created>1755922971694</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1755922971694</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="使用StopWatch统计响应耗时" />
+    <option name="LAST_COMMIT_MESSAGE" value="使用StopWatch统计响应耗时" />
   </component>
 </project>
