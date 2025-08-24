@@ -18,6 +18,7 @@ public class SSEServer {
         sseEmitter.onCompletion(completionCallback(userId));
         sseEmitter.onError(errorCallback(userId));
         sseClients.put(userId,sseEmitter);
+        log.info("用户{}已连接",userId);
         return sseEmitter;
     }
 
