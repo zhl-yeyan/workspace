@@ -1,5 +1,6 @@
 package com.zhl.service;
 
+import com.zhl.bean.ChatEntity;
 import org.springframework.ai.chat.model.ChatResponse;
 import reactor.core.publisher.Flux;
 
@@ -14,4 +15,6 @@ public interface ChatService {
     public Flux<ChatResponse> stremResponse(String prompt);
 
     public Flux<String> stremResponseStr(String prompt);
+
+    Flux<String> doChat(ChatEntity chatEntity);
 }

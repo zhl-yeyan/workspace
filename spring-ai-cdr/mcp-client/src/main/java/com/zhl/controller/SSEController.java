@@ -37,4 +37,14 @@ public class SSEController {
         SSEServer.sendMsg(userId,msg, SSEMsgType.MESSAGE);
         return "success";
     }
+    /**
+     * SSE消息群发
+     * @param msg
+     * @return
+     */
+    @GetMapping("/sendMsgAll")
+    public Object sendMsgAll(@RequestParam String msg) throws Exception {
+        SSEServer.sendMsgAll(msg);
+        return "success";
+    }
 }

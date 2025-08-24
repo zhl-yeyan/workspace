@@ -4,6 +4,8 @@ import com.zhl.enums.SSEMsgType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -84,5 +86,27 @@ public class SSEServer {
                 sseEmitter -> sendSseEmitterMsg(sseEmitter, userId, msg, type),
                 () -> removeClient(userId)
         );
+    }
+
+    public static void sendMsgAll(String msg) {
+        //判断sseClients是否为空
+        if (sseClients.isEmpty()) {
+            return;
+        }
+        // 创建需要移除的客户端列表
+        List<String> clientsToRemove = new ArrayList<>();
+        // 遍历所有客户端并发送消息
+        for (Map.Entry<String, SseEmitter> entry : sseClients.entrySet()) {
+            String userId = entry.getKey();
+            SseEmitter sseEmitter = entry.getValue();
+
+            if (sseEmitter != null) {
+                sendSseEmitterMsg(sseEmitter, userId, msg, SSEMsgType.MESSAGE);
+            } else {
+                clientsToRemove.add(userId);
+            }
+        }
+        // 移除无效的客户端连接
+        clientsToRemove.forEach(SSEServer::removeClient);
     }
 }

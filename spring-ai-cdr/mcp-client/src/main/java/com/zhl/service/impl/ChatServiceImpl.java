@@ -1,5 +1,6 @@
 package com.zhl.service.impl;
 
+import com.zhl.bean.ChatEntity;
 import com.zhl.service.ChatService;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
@@ -41,5 +42,10 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public Flux<String> stremResponseStr(String prompt) {
         return chatClient.prompt(prompt).stream().content();
+    }
+
+    @Override
+    public Flux<String> doChat(ChatEntity chatEntity) {
+        return null;
     }
 }

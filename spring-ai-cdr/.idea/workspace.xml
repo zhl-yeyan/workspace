@@ -4,20 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="发送单个SSE消息">
+    <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="解决跨域问题">
+      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/bean/ChatEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ai-ui/public/sse-client.html" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/public/sse-client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/ChatService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/impl/ChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/impl/ChatServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/CorsConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/Application.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/ServiceLogAspect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/HelloController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/SSEController.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/SSEController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/service/ChatService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/service/impl/ChatServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/enums/SSEMsgType.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/enums/SSEMsgType.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/utils/SSEServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/utils/SSEServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/mcp-clinet-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/mcp-clinet-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/surefire-reports/2025-08-23T12-50-57_609.dumpstream" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/surefire-reports/TEST-com.zhl.test.TimeTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/surefire-reports/com.zhl.test.TimeTest.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/test-classes/com/zhl/test/TimeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/test-classes/com/zhl/test/TimeTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1756009749948</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="解决跨域问题">
+      <created>1756044294661</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756044294661</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,6 +131,7 @@
     <MESSAGE value="创建SSE服务" />
     <MESSAGE value="创建SSEServer并补充跨域问题" />
     <MESSAGE value="发送单个SSE消息" />
-    <option name="LAST_COMMIT_MESSAGE" value="发送单个SSE消息" />
+    <MESSAGE value="解决跨域问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决跨域问题" />
   </component>
 </project>
