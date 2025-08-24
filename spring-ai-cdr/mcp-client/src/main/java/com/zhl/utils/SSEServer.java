@@ -21,6 +21,8 @@ public class SSEServer {
         sseEmitter.onError(errorCallback(userId));
         sseClients.put(userId,sseEmitter);
         log.info("用户{}已连接",userId);
+        // 连接后立即发送一次握手消息，确保浏览器 onopen/onmessage 可见
+        sendSseEmitterMsg(sseEmitter, userId, "connected", SSEMsgType.MESSAGE);
         return sseEmitter;
     }
 
@@ -57,7 +59,7 @@ public class SSEServer {
             SseEmitter.SseEventBuilder msgEvent = SseEmitter.event()
                     .id(userId)
                     .data(msg)
-                    .name(type.value);
+                    .name(type.type);
             if (sseEmitter != null) {
                 sseEmitter.send(msgEvent);
             }

@@ -18,11 +18,11 @@
 <body>
   <h1>SSE 客户端示例</h1>
   <div class="controls">
-    <input id="endpoint" value="http://localhost:9090/sse/connect" />
-    <button id="btnConnect">连接</button>
-    <button id="btnClose">关闭</button>
+    <input id="endpoint" value="/api/sse/connect" />
+    <button id="btnConnect" type="button">连接</button>
+    <button id="btnClose" type="button">关闭</button>
   </div>
-  <div class="tip">说明：默认走 /api 前缀，开发阶段由 Vite 代理到 http://localhost:9090，避免 CORS。</div>
+  <div class="tip">说明：默认走 /api 前缀，由 Vite 代理到后端 http://localhost:9090，避免跨域。</div>
   <div id="messages"></div>
 
   <script>
@@ -42,25 +42,21 @@
       const url = `${base}?userId=${encodeURIComponent(userId)}`;
 
       if (source) source.close();
+      console.log('开始连接 URL:', url);
       log(`开始连接: ${url}`);
+      // 如需携带 Cookie，可改为: new EventSource(url, { withCredentials: true })
       source = new EventSource(url);
+      log(`连接建立中: ${url}`);
 
-      source.addEventListener('open', () => {
+      source.addEventListener('open', (e) => {
         log(`建立连接成功: ${url}`);
-      });
-
-      // 默认 message 事件
+      },false);
       source.addEventListener('message', (e) => {
-        log(`message: ${e.data}`);
-      });
-
-      // 兼容后端使用自定义事件名，例如 'sse'
-      source.addEventListener('sse', (e) => {
-        log(`sse: ${e.data}`);
-      });
-
+        log(`接收消息: ${e.data}`);
+      },false);
+     
       source.addEventListener('error', (e) => {
-        log('发生错误/断开，浏览器将自动重连...');
+        log(`发生错误/断开，readyState=${source.readyState}（0-CONNECTING,1-OPEN,2-CLOSED）`);
         console.error(e);
       });
     }
@@ -73,8 +69,25 @@
       }
     }
 
-    $('btnConnect').addEventListener('click', connect);
-    $('btnClose').addEventListener('click', closeConn);
+    // 统一在 DOM 就绪后再绑定，避免偶发未绑定
+    document.addEventListener('DOMContentLoaded', () => {
+      const c = $('btnConnect');
+      const x = $('btnClose');
+      const msg = $('messages');
+      if (!c || !x || !msg) {
+        console.error('元素未找到', { c, x, msg });
+        log('元素未找到，请刷新页面 (Ctrl+F5)');
+        return;
+      }
+      c.addEventListener('click', connect);
+      x.addEventListener('click', closeConn);
+    });
+
+    // 捕获脚本错误并显示到页面，便于排查点击无响应
+    window.addEventListener('error', (e) => {
+      log('JS错误: ' + (e.message || 'unknown'));
+      console.error(e);
+    });
   </script>
 </body>
 </html>
