@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="创建SSE服务">
-      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/CorsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" afterDir="false" />
+    <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="创建SSEServer并补充跨域问题">
+      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/enums/SSEMsgType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +78,14 @@
       <option name="project" value="LOCAL" />
       <updated>1755924341227</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="创建SSEServer并补充跨域问题">
+      <created>1756008035859</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1756008035859</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,6 +102,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="使用StopWatch统计响应耗时" />
     <MESSAGE value="创建SSE服务" />
-    <option name="LAST_COMMIT_MESSAGE" value="创建SSE服务" />
+    <MESSAGE value="创建SSEServer并补充跨域问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="创建SSEServer并补充跨域问题" />
   </component>
 </project>

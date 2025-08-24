@@ -1,5 +1,6 @@
 package com.zhl.controller;
 
+import com.zhl.enums.SSEMsgType;
 import com.zhl.service.ChatService;
 import com.zhl.utils.SSEServer;
 import jakarta.annotation.Resource;
@@ -25,5 +26,15 @@ public class SSEController {
     public SseEmitter connect(@RequestParam String userId) throws Exception {
         return SSEServer.connect(userId);
     }
-
+    /**
+     * SSE发送单个消息
+     * @param userId
+     * @param msg
+     * @return
+     */
+    @GetMapping("/sendMsg")
+    public Object sendMsg(@RequestParam String userId,@RequestParam String msg) throws Exception {
+        SSEServer.sendMsg(userId,msg, SSEMsgType.MESSAGE);
+        return "success";
+    }
 }
