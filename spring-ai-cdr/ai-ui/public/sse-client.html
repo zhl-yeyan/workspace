@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SSE 客户端示例</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif; background:#fbfcff; margin:0; padding:24px; }
+    h1 { margin: 8px 0 16px; font-size: 18px; color:#344054; }
+    #messages { background:#fff; border:1px solid #eef0f5; border-radius:12px; padding:12px; min-height:120px; box-shadow: 0 6px 20px rgba(20,40,160,.06); }
+    .line { margin:6px 0; font-size:14px; color:#475467; }
+    .controls { margin: 12px 0 4px; display:flex; gap:8px; }
+    button { padding:6px 12px; border-radius:8px; border:1px solid #e0e6ff; background:#fff; color:#3b5bfd; cursor:pointer; }
+    input { width: 320px; padding:6px 10px; border-radius:8px; border:1px solid #e5e7eb; }
+    .tip { color:#667085; font-size:12px; margin:6px 0 12px; }
+  </style>
+</head>
+<body>
+  <h1>SSE 客户端示例</h1>
+  <div class="controls">
+    <input id="endpoint" value="http://localhost:9090/sse/connect" />
+    <button id="btnConnect">连接</button>
+    <button id="btnClose">关闭</button>
+  </div>
+  <div class="tip">说明：默认走 /api 前缀，开发阶段由 Vite 代理到 http://localhost:9090，避免 CORS。</div>
+  <div id="messages"></div>
+
+  <script>
+    let source = null;
+    const $ = (id) => document.getElementById(id);
+    const log = (text) => {
+      const node = document.createElement('div');
+      node.className = 'line';
+      node.textContent = text;
+      $('messages').appendChild(node);
+      node.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    };
+
+    function connect() {
+      const userId = Math.random().toString(36).slice(2, 9);
+      const base = $('endpoint').value || '/sse/connect';
+      const url = `${base}?userId=${encodeURIComponent(userId)}`;
+
+      if (source) source.close();
+      log(`开始连接: ${url}`);
+      source = new EventSource(url);
+
+      source.addEventListener('open', () => {
+        log(`建立连接成功: ${url}`);
+      });
+
+      // 默认 message 事件
+      source.addEventListener('message', (e) => {
+        log(`message: ${e.data}`);
+      });
+
+      // 兼容后端使用自定义事件名，例如 'sse'
+      source.addEventListener('sse', (e) => {
+        log(`sse: ${e.data}`);
+      });
+
+      source.addEventListener('error', (e) => {
+        log('发生错误/断开，浏览器将自动重连...');
+        console.error(e);
+      });
+    }
+
+    function closeConn() {
+      if (source) {
+        source.close();
+        source = null;
+        log('连接已关闭');
+      }
+    }
+
+    $('btnConnect').addEventListener('click', connect);
+    $('btnClose').addEventListener('click', closeConn);
+  </script>
+</body>
+</html>
+
+

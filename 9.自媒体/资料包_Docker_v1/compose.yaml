@@ -1,0 +1,35 @@
+services:
+  app:
+    # 二选一：使用已构建镜像
+    # image: app:1.0.0
+    # 或者直接本地构建
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      TZ: Asia/Shanghai
+    depends_on:
+      - db
+      - redis
+    restart: always
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      TZ: Asia/Shanghai
+    volumes:
+      - dbdata:/var/lib/mysql
+    restart: always
+
+  redis:
+    image: redis:7
+    command: ["redis-server", "--appendonly", "yes"]
+    restart: always
+
+volumes:
+  dbdata:
+
+

@@ -1,0 +1,19 @@
+# 构建阶段
+FROM eclipse-temurin:17-jdk AS build
+WORKDIR /src
+COPY . .
+# 如有 mvnw，请提前赋权：RUN chmod +x mvnw
+RUN ./mvnw -DskipTests package
+
+# 运行阶段
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /src/target/*.jar app.jar
+USER 1000
+EXPOSE 8080
+ENV JAVA_OPTS=""
+# 可选：健康检查（需要在镜像中安装 curl 或用 jlink 自带工具）
+# HEALTHCHECK --interval=30s --timeout=3s --retries=3 CMD curl -f http://localhost:8080/actuator/health || exit 1
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar app.jar"]
+
+

@@ -1,0 +1,13 @@
+* { box-sizing: border-box; }
+html, body, #app { height: 100%; }
+body {
+  margin: 0;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+  color: #1f2937;
+  background: #fafbff;
+}
+
+button { cursor: pointer; }
+input::placeholder { color: #a0aec0; }
+
+
