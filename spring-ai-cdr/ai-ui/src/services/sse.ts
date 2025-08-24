@@ -17,6 +17,16 @@ export function connectSse(url: string, onMessage: SseOnMessage): EventSource {
       // no-op
     }
   };
+  // 监听常见自定义事件名，全部转发给处理器
+  ['add', 'message', 'finish', 'done', 'custom_event'].forEach((evt) => {
+    source.addEventListener(evt, (event: MessageEvent) => {
+      try {
+        currentHandler && currentHandler((event as MessageEvent).data as string, event as MessageEvent);
+      } catch {
+        // no-op
+      }
+    });
+  });
   source.onerror = () => {
     // Keep the connection; EventSource will auto-reconnect by default.
   };

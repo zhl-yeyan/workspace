@@ -16,5 +16,5 @@ public interface ChatService {
 
     public Flux<String> stremResponseStr(String prompt);
 
-    Flux<String> doChat(ChatEntity chatEntity);
+    void doChat(ChatEntity chatEntity);
 }

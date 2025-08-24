@@ -5,22 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fb70b34-f2fd-48cd-8a15-0087f797e633" name="Changes" comment="解决跨域问题">
-      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/bean/ChatEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/bean/ChatResponseEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/SSEController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/.yarn/install-state.gz" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/.yarn/install-state.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/node_modules/.vite/deps/_metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/node_modules/.vite/deps/_metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/node_modules/.vite/deps/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/node_modules/.vite/deps/vue.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/node_modules/.vite/deps/vue.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/node_modules/.vite/deps/vue.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/node_modules/.yarn-state.yml" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/node_modules/.yarn-state.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/src/services/sse.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/src/services/sse.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ai-ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ai-ui/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/ChatController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/controller/ChatController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/ChatService.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/ChatService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/impl/ChatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/service/impl/ChatServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/src/main/java/com/zhl/utils/SSEServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/ServiceLogAspect.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/ServiceLogAspect.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/bean/ChatEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/bean/ChatEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/config/CorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/config/CorsConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/ChatController.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/ChatController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/HelloController.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/HelloController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/SSEController.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/controller/SSEController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/enums/SSEMsgType.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/enums/SSEMsgType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/service/ChatService.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/service/ChatService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/service/impl/ChatServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/service/impl/ChatServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/utils/SSEServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/classes/com/zhl/utils/SSEServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/mcp-clinet-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/mcp-clinet-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/surefire-reports/2025-08-23T12-50-57_609.dumpstream" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/surefire-reports/TEST-com.zhl.test.TimeTest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mcp-client/target/surefire-reports/com.zhl.test.TimeTest.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mcp-client/target/test-classes/com/zhl/test/TimeTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/mcp-client/target/test-classes/com/zhl/test/TimeTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +55,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.zhl.bean" />
       <recent name="com.zhl.controller" />
     </key>
   </component>

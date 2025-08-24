@@ -594,6 +594,7 @@ __metadata:
   resolution: "ai-ui@workspace:."
   dependencies:
     "@vitejs/plugin-vue": "npm:^5.0.0"
+    marked: "npm:^12.0.2"
     typescript: "npm:^5.4.0"
     vite: "npm:^5.0.0"
     vue: "npm:^3.4.0"
@@ -1077,6 +1078,15 @@ __metadata:
     promise-retry: "npm:^2.0.1"
     ssri: "npm:^12.0.0"
   checksum: 10c0/c40efb5e5296e7feb8e37155bde8eb70bc57d731b1f7d90e35a092fde403d7697c56fb49334d92d330d6f1ca29a98142036d6480a12681133a0a1453164cb2f0
+  languageName: node
+  linkType: hard
+
+"marked@npm:^12.0.2":
+  version: 12.0.2
+  resolution: "marked@npm:12.0.2"
+  bin:
+    marked: bin/marked.js
+  checksum: 10c0/45ae2e1e3f06b30a5b5f64efc6cde9830c81d1d024fd7668772a3217f1bc0f326e66a6b8970482d9783edf1f581fecac7023a7fa160f2c14dbcc16e064b4eafb
   languageName: node
   linkType: hard
 

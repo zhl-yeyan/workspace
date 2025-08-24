@@ -5,7 +5,7 @@
       <button class="pair-btn">对对</button>
     </header>
 
-    <main class="chat">
+    <main class="chat" ref="chatRef">
       <div v-if="messages.length === 0" class="empty-tip"></div>
       <div
         v-for="(m, idx) in messages"
@@ -13,7 +13,8 @@
         class="message"
         :class="{ me: m.role === 'user' }"
       >
-        <div class="bubble">{{ m.content }}</div>
+        <div v-if="!m.html" class="bubble">{{ m.content }}</div>
+        <div v-else class="bubble" v-html="m.html"></div>
       </div>
     </main>
 
@@ -30,13 +31,13 @@
             class="action"
             :class="{ active: enableDeepThink }"
             @click="enableDeepThink = !enableDeepThink"
-            :aria-pressed="enableDeepThink.toString()"
+            :aria-pressed="enableDeepThink"
           >深度思考</button>
           <button
             class="action"
             :class="{ active: enableWebSearch }"
             @click="enableWebSearch = !enableWebSearch"
-            :aria-pressed="enableWebSearch.toString()"
+            :aria-pressed="enableWebSearch"
           >联网搜索</button>
           <button class="action" @click="toggleSse">SSEServer</button>
           <button class="send" @click="onSendClick">
@@ -51,52 +52,83 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onBeforeUnmount, nextTick } from 'vue';
+import { marked } from 'marked';
 import { connectSse, closeSse, isSseConnected, setSseHandler } from './services/sse';
+import { sendChat } from './ts/api';
 
 const input = ref('');
 const showSquare = ref(false);
 const enableDeepThink = ref(false);
 const enableWebSearch = ref(false);
-type ChatMessage = { role: 'user' | 'assistant'; content: string };
+type ChatMessage = { role: 'user' | 'assistant'; content: string; html?: string };
 const messages = ref<ChatMessage[]>([]);
 const streamingAssistantIndex = ref<number | null>(null);
+const sseUserId = ref<string>('');
+const chatRef = ref<HTMLElement | null>(null);
+
+function scrollToBottom() {
+  nextTick(() => {
+    const el = chatRef.value as HTMLElement | null;
+    if (el) {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    }
+  });
+}
+
+function renderMarkdownIntoMessage(index: number, text: string) {
+  const result = marked.parse(text);
+  const applyHtml = (html: string) => {
+    const current = messages.value[index];
+    if (!current) return;
+    current.html = html;
+    current.content = '';
+    messages.value[index] = { ...current };
+  };
+  if (result && typeof (result as any)?.then === 'function') {
+    (result as Promise<string>).then((html) => {
+      applyHtml(html);
+      scrollToBottom();
+    });
+  } else {
+    applyHtml(result as string);
+  }
+}
+
+function buildSseUrl(): string {
+  if (!sseUserId.value) {
+    sseUserId.value = Math.random().toString(36).slice(2, 10);
+  }
+  return `/api/sse/connect?userId=${encodeURIComponent(sseUserId.value)}`;
+}
 
 async function send() {
   const text = input.value.trim();
   if (!text) return;
   messages.value.push({ role: 'user', content: text });
   input.value = '';
+  // 新一轮对话开始时，重置流式索引，确保助手消息紧跟其后
+  streamingAssistantIndex.value = null;
+  scrollToBottom();
   const payload = {
+    // 后端需要 ChatEntity 格式：currentUserName/message/botMsgId
     text,
     deepThink: enableDeepThink.value,
     webSearch: enableWebSearch.value,
     timestamp: Date.now(),
   };
-  const url = `/api/strem/str?msg=${encodeURIComponent(JSON.stringify(payload))}`;
   try {
     // 确保已连接 SSE，以接收流式返回
     ensureSseConnected();
-    const res = await fetch(url);
-    const bodyText = await res.text();
-    console.log('GET /api/strem/str response:', bodyText);
-    if (bodyText) {
-      // 如果没有产生流式气泡，则直接一次性渲染返回文本
-      if (streamingAssistantIndex.value == null) {
-        messages.value.push({ role: 'assistant', content: String(bodyText) });
-      } else {
-        // 已有流式气泡，则把最终文本也拼接进去
-        const idx = streamingAssistantIndex.value;
-        const current = messages.value[idx];
-        if (current) {
-          current.content += String(bodyText);
-          messages.value[idx] = { ...current };
-        }
-      }
-      // 结束本轮
-      showSquare.value = false;
-      streamingAssistantIndex.value = null;
-    }
+    await sendChat({
+      // 透传原信息，便于后续扩展
+      ...payload,
+      userId: sseUserId.value,
+      // 映射为后端 ChatEntity
+      currentUserName: sseUserId.value,
+      message: text,
+      botMsgId: ''
+    } as any);
   } catch (e) {
     console.error('GET /api/strem/str error:', e);
   }
@@ -112,10 +144,32 @@ function toggleSse() {
     closeSse();
     return;
   }
-  connectSse('/api/', onSseChunk);
+  connectSse(buildSseUrl(), onSseChunk);
 }
 
-function onSseChunk(data: string) {
+function onSseChunk(data: string, event: MessageEvent) {
+  const text = String(data);
+  // 忽略连接探活等无效内容
+  if (text.trim().toLowerCase() === 'connected') return;
+
+  // 结束事件：收尾并为下次回复创建新气泡
+  if (event && (event.type === 'finish' || event.type === 'done')) {
+    try {
+      const parsed = JSON.parse(text);
+      const finalMessage: string = parsed?.message ?? '';
+      const idx = streamingAssistantIndex.value ?? messages.value.length - 1;
+      renderMarkdownIntoMessage(idx, finalMessage);
+    } catch {
+      // 如果不是 JSON，就按纯文本结束并渲染为 Markdown
+      const idx = streamingAssistantIndex.value ?? messages.value.length - 1;
+      renderMarkdownIntoMessage(idx, text);
+    }
+    streamingAssistantIndex.value = null;
+    showSquare.value = false;
+    scrollToBottom();
+    return;
+  }
+
   // 把 SSE 片段追加到同一个助手气泡，实现“流式输出”
   if (streamingAssistantIndex.value == null) {
     streamingAssistantIndex.value = messages.value.length;
@@ -124,19 +178,26 @@ function onSseChunk(data: string) {
   const idx = streamingAssistantIndex.value;
   const current = messages.value[idx];
   if (current) {
-    current.content += String(data);
+    current.content += text;
     // 触发响应式更新
     messages.value[idx] = { ...current };
+    scrollToBottom();
   }
 }
 
 function ensureSseConnected() {
   if (!isSseConnected()) {
-    connectSse('/api/', onSseChunk);
+    connectSse(buildSseUrl(), onSseChunk);
   } else {
     setSseHandler(onSseChunk);
   }
 }
+
+const sseConnected = computed(() => isSseConnected());
+
+onBeforeUnmount(() => {
+  closeSse();
+});
 </script>
 
 <style scoped>
