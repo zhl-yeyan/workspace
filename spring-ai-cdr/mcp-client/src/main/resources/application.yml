@@ -10,5 +10,15 @@ spring:
       chat:
         options:
           model: deepseek-chat
+    vectorstore:
+      redis:
+        initialize-schema: true   #是否初始化所需模式
+        index-name: lee-vectiorstore   #用于存储向量的索引名称
+        prefix: 'embedding:'           # Redis 键的前缀
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 7379
+      # password: 123456
 
 
