@@ -2,7 +2,6 @@
   <div class="page">
     <header class="header">
       <div class="title">新对话</div>
-      <button class="pair-btn">对对</button>
     </header>
 
     <main class="chat" ref="chatRef">
@@ -39,6 +38,8 @@
             @click="enableWebSearch = !enableWebSearch"
             :aria-pressed="enableWebSearch"
           >联网搜索</button>
+          <button class="action" @click="triggerUpload">上传文件</button>
+          <input ref="fileInputRef" type="file" style="display:none" @change="onFileChange" />
           <button class="action" @click="toggleSse">SSEServer</button>
           <button class="send" @click="onSendClick">
             <span v-if="!showSquare">→</span>
@@ -55,7 +56,7 @@
 import { ref, computed, onBeforeUnmount, nextTick } from 'vue';
 import { marked } from 'marked';
 import { connectSse, closeSse, isSseConnected, setSseHandler } from './services/sse';
-import { sendChat } from './ts/api';
+import { sendChat, uploadRagDoc } from './ts/api';
 
 const input = ref('');
 const showSquare = ref(false);
@@ -66,6 +67,7 @@ const messages = ref<ChatMessage[]>([]);
 const streamingAssistantIndex = ref<number | null>(null);
 const sseUserId = ref<string>('');
 const chatRef = ref<HTMLElement | null>(null);
+const fileInputRef = ref<HTMLInputElement | null>(null);
 
 function scrollToBottom() {
   nextTick(() => {
@@ -137,6 +139,27 @@ async function send() {
 function onSendClick() {
   send();
   showSquare.value = true;
+}
+
+function triggerUpload() {
+  const el = fileInputRef.value as HTMLInputElement | null;
+  if (el) el.click();
+}
+
+async function onFileChange(e: Event) {
+  const inputEl = e.target as HTMLInputElement;
+  const file = inputEl.files?.[0];
+  if (!file) return;
+  try {
+    await uploadRagDoc(file);
+    messages.value.push({ role: 'assistant', content: '文件上传成功' });
+  } catch (err) {
+    console.error('upload error:', err);
+    messages.value.push({ role: 'assistant', content: '文件上传失败' });
+  } finally {
+    inputEl.value = '';
+    scrollToBottom();
+  }
 }
 
 function toggleSse() {

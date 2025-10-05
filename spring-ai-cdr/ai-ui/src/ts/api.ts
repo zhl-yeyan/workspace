@@ -22,3 +22,21 @@ export async function sendChat(payload: ChatPayload & { userId?: string }): Prom
 }
 
 
+export async function uploadRagDoc(file: File): Promise<any> {
+  const formData = new FormData();
+  formData.append('file', file);
+  const res = await fetch(`/api/rag/uploadRagDoc`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+  }
+  try {
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+
