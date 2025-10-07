@@ -26,11 +26,17 @@ public class RagServiceImpl implements RagService {
         textReader.getCustomMetadata().put("fileName",fileName);
         List<Document> documents = textReader.get();
 
-        //切分文档
+        //切分文档，这是默认的文本切分器，也可以自定义文本切分器
         TokenTextSplitter tokenTextSplitter = new TokenTextSplitter();
         List<Document> apply = tokenTextSplitter.apply(documents);
 
         //向量存储
         redisVectorStore.add(apply);
+    }
+
+    @Override
+    public List<Document> doSearch(String query) {
+        List<Document> documents = redisVectorStore.similaritySearch(query);
+        return documents;
     }
 }
