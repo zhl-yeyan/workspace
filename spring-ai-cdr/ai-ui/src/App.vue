@@ -38,6 +38,12 @@
             @click="enableWebSearch = !enableWebSearch"
             :aria-pressed="enableWebSearch"
           >联网搜索</button>
+          <button
+            class="action"
+            :class="{ active: enableRagSearch }"
+            @click="enableRagSearch = !enableRagSearch"
+            :aria-pressed="enableRagSearch"
+          >知识库检索</button>
           <button class="action" @click="triggerUpload">上传文件</button>
           <input ref="fileInputRef" type="file" style="display:none" @change="onFileChange" />
           <button class="action" @click="toggleSse">SSEServer</button>
@@ -56,12 +62,13 @@
 import { ref, computed, onBeforeUnmount, nextTick } from 'vue';
 import { marked } from 'marked';
 import { connectSse, closeSse, isSseConnected, setSseHandler } from './services/sse';
-import { sendChat, uploadRagDoc } from './ts/api';
+import { sendChat, sendChatRag, uploadRagDoc } from './ts/api';
 
 const input = ref('');
 const showSquare = ref(false);
 const enableDeepThink = ref(false);
 const enableWebSearch = ref(false);
+const enableRagSearch = ref(false);
 type ChatMessage = { role: 'user' | 'assistant'; content: string; html?: string };
 const messages = ref<ChatMessage[]>([]);
 const streamingAssistantIndex = ref<number | null>(null);
@@ -122,7 +129,7 @@ async function send() {
   try {
     // 确保已连接 SSE，以接收流式返回
     ensureSseConnected();
-    await sendChat({
+    const requestPayload = {
       // 透传原信息，便于后续扩展
       ...payload,
       userId: sseUserId.value,
@@ -130,7 +137,12 @@ async function send() {
       currentUserName: sseUserId.value,
       message: text,
       botMsgId: ''
-    } as any);
+    } as any;
+    if (enableRagSearch.value) {
+      await sendChatRag(requestPayload);
+    } else {
+      await sendChat(requestPayload);
+    }
   } catch (e) {
     console.error('GET /api/strem/str error:', e);
   }

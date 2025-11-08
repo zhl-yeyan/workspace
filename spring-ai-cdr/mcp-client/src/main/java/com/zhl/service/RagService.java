@@ -1,5 +1,6 @@
 package com.zhl.service;
 
+import com.zhl.bean.ChatEntity;
 import org.springframework.ai.document.Document;
 import org.springframework.core.io.Resource;
 
@@ -19,4 +20,6 @@ public interface RagService {
      * @return
      */
     public List<Document> doSearch(String query);
+
+    void doChatRagSearch(ChatEntity chatEntity,List<Document> ragContext);
 }

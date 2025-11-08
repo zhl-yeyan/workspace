@@ -39,4 +39,17 @@ export async function uploadRagDoc(file: File): Promise<any> {
   }
 }
 
+export async function sendChatRag(payload: ChatPayload & { userId?: string }): Promise<void> {
+  const res = await fetch(`/api/rag/doChatRagSearch`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}`);
+  }
+}
+
 

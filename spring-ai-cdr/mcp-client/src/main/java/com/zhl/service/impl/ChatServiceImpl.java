@@ -70,4 +70,6 @@ public class ChatServiceImpl implements ChatService {
         log.info("chatResponseEntity:{}",JSONUtil.toJsonStr(chatResponseEntity));
         SSEServer.sendMsg(userId, JSONUtil.toJsonStr(chatResponseEntity),SSEMsgType.FINISH);
     }
+
+
 }
