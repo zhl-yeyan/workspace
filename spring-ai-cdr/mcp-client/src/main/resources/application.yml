@@ -20,11 +20,11 @@ spring:
         enabled: true
         name: spring-ai-mcp-client
         type: async
-#        sse:
-#          connections:
-#            server:
-#              url: https://mcp.amap.com
-#              sse-endpoint: sse?key=db42b3d6446d63a4a0129026ec25f88a
+        sse:
+          connections:
+            server:
+              url: https://mcp.amap.com
+              sse-endpoint: /sse?key=db42b3d6446d63a4a0129026ec25f88a
         stdio:
           servers-configuration: classpath:/mcp-server.json
 
