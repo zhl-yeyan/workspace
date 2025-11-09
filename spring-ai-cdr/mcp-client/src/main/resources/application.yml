@@ -22,9 +22,12 @@ spring:
         type: async
         sse:
           connections:
-            server:
+            server1:
               url: https://mcp.amap.com
               sse-endpoint: /sse?key=db42b3d6446d63a4a0129026ec25f88a
+            server2:
+              url: http://localhost:9060
+              sse-endpoint: /sse
         stdio:
           servers-configuration: classpath:/mcp-server.json
 
