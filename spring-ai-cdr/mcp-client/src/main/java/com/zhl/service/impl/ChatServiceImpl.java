@@ -9,6 +9,7 @@ import com.zhl.utils.SSEServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -33,9 +34,10 @@ public class ChatServiceImpl implements ChatService {
      */
 
 
-    public ChatServiceImpl(ChatClient.Builder builder) {
+    public ChatServiceImpl(ChatClient.Builder builder, ToolCallbackProvider toolCallbackProvider) {
         this.chatClient = builder
-                .defaultSystem(systemPrompt)
+//                .defaultSystem(systemPrompt)
+                .defaultToolCallbacks(toolCallbackProvider)
                 .build();
     }
     @Override
