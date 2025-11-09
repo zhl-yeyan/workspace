@@ -15,6 +15,19 @@ spring:
         initialize-schema: true   # 避免启动期调用 embeddings 失败，确认无误后再改回 true
         index-name: lee-vectiorstore   # 用于存储向量的索引名称
         prefix: 'embedding:'         # Redis 键的前缀
+    mcp:
+      client:
+        enabled: true
+        name: spring-ai-mcp-client
+        type: async
+#        sse:
+#          connections:
+#            server:
+#              url: https://mcp.amap.com
+#              sse-endpoint: sse?key=db42b3d6446d63a4a0129026ec25f88a
+        stdio:
+          servers-configuration: classpath:/mcp-server.json
+
   data:
     redis:
       host: 127.0.0.1
