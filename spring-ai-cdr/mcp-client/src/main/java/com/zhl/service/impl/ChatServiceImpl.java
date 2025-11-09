@@ -8,6 +8,8 @@ import com.zhl.service.ChatService;
 import com.zhl.utils.SSEServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class ChatServiceImpl implements ChatService {
     private String systemPrompt = """
                   你是一个非常聪明的人工助手，可以帮我解决很多问题，你的名字叫小赵
                   """;
+    private ChatMemory chatMemory;
+
+
 
     /**
      * 提示词三大类型
@@ -32,12 +37,11 @@ public class ChatServiceImpl implements ChatService {
      * assistant
      *
      */
-
-
-    public ChatServiceImpl(ChatClient.Builder builder, ToolCallbackProvider toolCallbackProvider) {
+    public ChatServiceImpl(ChatClient.Builder builder, ToolCallbackProvider toolCallbackProvider,ChatMemory chatMemory) {
         this.chatClient = builder
 //                .defaultSystem(systemPrompt)
                 .defaultToolCallbacks(toolCallbackProvider)
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .build();
     }
     @Override
